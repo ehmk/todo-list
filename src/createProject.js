@@ -3,8 +3,8 @@
 
 import TodoItem from './createTodoItem';
 
-export default class project {
-  constructor(todoList) {
-    this.todoList = todoList;
+export default class Project {
+  constructor(projectName) {
+    this.projectName = projectName;
   }
 }

@@ -1,6 +1,6 @@
 import TodoItem from './createTodoItem';
 
-export default function createTodoDiv(todoItem) {
+export function createTodoDiv(todoItem) {
   const div = document.createElement('div');
   const title = document.createElement('h3');
   const description = document.createElement('p');
@@ -13,6 +13,7 @@ export default function createTodoDiv(todoItem) {
   priority.textContent = `Priority: ${todoItem.priority}`;
 
   const properties = [title, description, dueDate, priority];
+  div.classList.add('todo-item');
   appendToElement(div, properties);
 
   return div;
@@ -22,4 +23,14 @@ function appendToElement(parent, children) {
   for (let i = 0; i < children.length; i++) {
     parent.appendChild(children[i]);
   }
+}
+
+export function createProjectDiv(project) {
+  const div = document.createElement('div');
+  const title = document.createElement('h2');
+
+  title.textContent = project.projectName;
+  div.appendChild(title);
+  div.classList.add('project');
+  return div;
 }
