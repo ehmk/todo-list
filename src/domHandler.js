@@ -3,7 +3,7 @@ import './styles/index.css';
 
 export function createTodoDiv(todoItem) {
   const div = document.createElement('div');
-  const title = document.createElement('h3');
+  const title = document.createElement('h4');
   const description = document.createElement('p');
   const dueDate = document.createElement('p');
   const priority = document.createElement('p');
@@ -29,9 +29,13 @@ function appendToElement(parent, children) {
 export function createProjectDiv(project) {
   const div = document.createElement('div');
   const title = document.createElement('h2');
+  const tasks = document.createElement('h3');
 
   title.textContent = project.projectName;
-  div.appendChild(title);
+  tasks.textContent = 'Tasks';
+
+  const properties = [title, tasks];
   div.classList.add('project');
+  appendToElement(div, properties);
   return div;
 }
