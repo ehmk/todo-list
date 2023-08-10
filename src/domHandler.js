@@ -1,4 +1,5 @@
 import TodoItem from './createTodoItem';
+import './styles/index.css';
 
 export function createTodoDiv(todoItem) {
   const div = document.createElement('div');
