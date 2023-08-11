@@ -13,7 +13,7 @@ export function createTodoDiv(todoItem) {
   description.textContent = `Description: ${todoItem.description}`;
   dueDate.textContent = `Due Date: ${todoItem.dueDate}`;
   priority.textContent = `Priority: ${todoItem.priority}`;
-  expandBtn.textContent = `Expand`;
+  expandBtn.textContent = `Show Details`;
 
   div.classList.add('todo-item');
   description.classList.add('task-detail');
@@ -23,7 +23,7 @@ export function createTodoDiv(todoItem) {
   const taskDetails = [description, priority];
 
   expandBtn.addEventListener('click', () => {
-    showHideDetails(taskDetails);
+    showHideDetails(taskDetails, expandBtn);
   });
 
   const divChildren = [title, dueDate, description, priority, expandBtn];
@@ -41,25 +41,23 @@ function appendToElement(parent, children) {
 export function createProjectDiv(project) {
   const div = document.createElement('div');
   const title = document.createElement('h2');
-  const tasks = document.createElement('h3');
 
   title.textContent = project.projectName;
-  tasks.textContent = 'Tasks';
-
-  const divChildren = [title, tasks];
   div.classList.add('project');
+
+  const divChildren = [title];
   appendToElement(div, divChildren);
   return div;
 }
 
-function showHideDetails(details) {
+function showHideDetails(details, btn) {
   for (let i = 0; i < details.length; i++) {
     if (window.getComputedStyle(details[i]).display === 'none') {
       details[i].style.display = 'block';
-      console.log('1');
-    } else {
+      btn.textContent = 'Hide Details';
+    } else if (window.getComputedStyle(details[i]).display !== 'none') {
       details[i].style.display = 'none';
-      // console.log(details[i].style.display);
+      btn.textContent = 'Show Details';
     }
   }
 }
