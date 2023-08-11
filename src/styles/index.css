@@ -19,3 +19,29 @@ body {
 .project h2 {
   margin-top: 0px;
 }
+
+.todo-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  align-items: center;
+}
+
+.todo-item h4 {
+  margin: 0px;
+  padding: 10px;
+}
+
+.todo-item p {
+  margin: 0px;
+  padding: 10px;
+}
+
+.task-detail {
+  display: none;
+}
+
+.expand-btn {
+  justify-self: center;
+  margin-top: 10px;
+}

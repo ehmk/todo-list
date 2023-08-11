@@ -7,15 +7,27 @@ export function createTodoDiv(todoItem) {
   const description = document.createElement('p');
   const dueDate = document.createElement('p');
   const priority = document.createElement('p');
+  const expandBtn = document.createElement('button');
 
   title.textContent = todoItem.title;
   description.textContent = `Description: ${todoItem.description}`;
   dueDate.textContent = `Due Date: ${todoItem.dueDate}`;
   priority.textContent = `Priority: ${todoItem.priority}`;
+  expandBtn.textContent = `Expand`;
 
-  const properties = [title, description, dueDate, priority];
   div.classList.add('todo-item');
-  appendToElement(div, properties);
+  description.classList.add('task-detail');
+  priority.classList.add('task-detail');
+  expandBtn.classList.add('expand-btn');
+
+  const taskDetails = [description, priority];
+
+  expandBtn.addEventListener('click', () => {
+    showHideDetails(taskDetails);
+  });
+
+  const divChildren = [title, dueDate, description, priority, expandBtn];
+  appendToElement(div, divChildren);
 
   return div;
 }
@@ -34,8 +46,20 @@ export function createProjectDiv(project) {
   title.textContent = project.projectName;
   tasks.textContent = 'Tasks';
 
-  const properties = [title, tasks];
+  const divChildren = [title, tasks];
   div.classList.add('project');
-  appendToElement(div, properties);
+  appendToElement(div, divChildren);
   return div;
+}
+
+function showHideDetails(details) {
+  for (let i = 0; i < details.length; i++) {
+    if (window.getComputedStyle(details[i]).display === 'none') {
+      details[i].style.display = 'block';
+      console.log('1');
+    } else {
+      details[i].style.display = 'none';
+      // console.log(details[i].style.display);
+    }
+  }
 }
