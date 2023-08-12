@@ -87,6 +87,7 @@ function addTaskForm() {
     'form-item',
     form
   );
+  appendToElement(form, createPrioritySelect());
   form.appendChild(createSubmitButton());
 
   return form;
@@ -232,4 +233,24 @@ function createYearSelect() {
   populateYears(yearSelect);
 
   return [yearLabel, yearSelect];
+}
+
+function populatePriorities(prioritySelect) {
+  const priorities = ['Low', 'Medium', 'High'];
+
+  for (const priority of priorities) {
+    const option = document.createElement('option');
+    option.value = priority;
+    option.textContent = priority;
+    prioritySelect.appendChild(option);
+  }
+}
+
+function createPrioritySelect() {
+  const label = document.createElement('label');
+  const prioritySelect = document.createElement('select');
+  label.textContent = 'Priority: ';
+  populatePriorities(prioritySelect);
+
+  return [label, prioritySelect];
 }

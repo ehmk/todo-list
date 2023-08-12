@@ -21,7 +21,7 @@ body {
 }
 
 .new-task-form {
-  padding: 25px 0 50px 0;
+  padding: 25px 0 10px 0;
   min-width: 225px;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,15 @@ body {
 }
 
 .form-due-date {
-  margin: 10px 0px 20px 0px;
+  margin: 0px 0px 20px 0px;
+}
+
+.form-due-date h4 {
+  margin: 10px 0 10px 0;
+}
+
+.form-due-date label {
+  margin-left: 10px;
 }
 
 #form-submit {
