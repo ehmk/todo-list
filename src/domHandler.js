@@ -8,7 +8,7 @@ export function createProjectDiv(project) {
   title.textContent = project.projectName;
   div.classList.add('project');
 
-  const divChildren = [title];
+  const divChildren = [title, addTaskForm()];
   appendToElement(div, divChildren);
   return div;
 }
@@ -63,4 +63,41 @@ function createExpandBtn(details) {
   }
   btn.addEventListener('click', toggleDetails);
   return btn;
+}
+
+function addTaskForm() {
+  const form = document.createElement('form');
+  const submit = createSubmitButton();
+  form.appendChild(
+    createStringInputElement('title', 'Title', 'Enter a title', 'todo-item')[0]
+  );
+  form.appendChild(
+    createStringInputElement('title', 'Title', 'Enter a title', 'todo-item')[1]
+  );
+  form.appendChild(createSubmitButton());
+  return form;
+}
+
+function createStringInputElement(
+  name,
+  labelTextContent,
+  placeholder,
+  inputClass
+) {
+  const label = document.createElement('label');
+  const input = document.createElement('input');
+  label.setAttribute('for', name);
+  label.textContent = labelTextContent;
+  input.setAttribute('type', 'text');
+  input.placeholder = placeholder;
+  input.classList.add(inputClass);
+  input.setAttribute('name', name);
+  return [label, input];
+}
+
+function createSubmitButton() {
+  const submit = document.createElement('button');
+  submit.setAttribute('type', 'submit');
+  submit.textContent = 'Submit';
+  return submit;
 }
