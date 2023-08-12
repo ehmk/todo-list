@@ -83,6 +83,7 @@ function addTaskForm() {
     'form-item',
     form
   );
+  form.appendChild(createDateInput());
   form.appendChild(createSubmitButton());
   return form;
 }
@@ -124,4 +125,82 @@ function createSubmitButton() {
   submit.setAttribute('type', 'submit');
   submit.textContent = 'Submit';
   return submit;
+}
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+function createDateInput() {
+  const div = document.createElement('div');
+  appendToElement(div, createMonthSelect());
+  appendToElement(div, createDaySelect());
+  appendToElement(div, createYearSelect());
+  return div;
+}
+
+function populateMonths(monthSelect) {
+  for (let month = 0; month < months.length; month++) {
+    const option = document.createElement('option');
+    option.value = month + 1;
+    option.textContent = months[month];
+    monthSelect.appendChild(option);
+  }
+}
+
+function populateDays(daySelect) {
+  for (let day = 1; day <= 31; day++) {
+    const option = document.createElement('option');
+    option.value = day;
+    option.textContent = day;
+    daySelect.appendChild(option);
+  }
+}
+
+function populateYears(yearSelect) {
+  const currentYear = new Date().getFullYear();
+  for (let year = currentYear; year <= currentYear + 50; year++) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    yearSelect.appendChild(option);
+  }
+}
+
+function createMonthSelect() {
+  const monthLabel = document.createElement('label');
+  const monthSelect = document.createElement('select');
+  monthLabel.textContent = 'Month: ';
+  populateMonths(monthSelect);
+
+  return [monthLabel, monthSelect];
+}
+
+function createDaySelect() {
+  const dayLabel = document.createElement('label');
+  const daySelect = document.createElement('select');
+  dayLabel.textContent = 'Day: ';
+  populateDays(daySelect);
+
+  return [dayLabel, daySelect];
+}
+
+function createYearSelect() {
+  const yearLabel = document.createElement('label');
+  const yearSelect = document.createElement('select');
+  yearLabel.textContent = 'Year: ';
+  populateYears(yearSelect);
+
+  return [yearLabel, yearSelect];
 }

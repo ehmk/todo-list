@@ -23,6 +23,8 @@ body {
 .new-task-form {
   padding: 25px 0 50px 0;
   min-width: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-item {
