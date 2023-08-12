@@ -22,7 +22,7 @@ body {
 
 .new-task-form {
   padding: 25px 0 50px 0;
-  min-width: 200px;
+  min-width: 225px;
   display: flex;
   flex-direction: column;
 }
@@ -30,6 +30,32 @@ body {
 .form-item {
   display: block;
   margin: 10px 0px 10px 0px;
+}
+
+.form-due-date {
+  margin: 10px 0px 20px 0px;
+}
+
+#form-submit {
+  justify-self: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(43, 41, 41);
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 5px;
+}
+
+#form-toggle {
+  justify-self: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(43, 41, 41);
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 5px;
 }
 
 .todo-item {
@@ -72,4 +98,8 @@ body {
 
 .display-block {
   display: block;
+}
+
+.display-flex {
+  display: flex;
 }

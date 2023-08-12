@@ -4,11 +4,13 @@ import './styles/index.css';
 export function createProjectDiv(project) {
   const div = document.createElement('div');
   const title = document.createElement('h2');
+  const form = addTaskForm();
+  const toggleFormBtn = createToggleFormButton(form);
 
   title.textContent = project.projectName;
   div.classList.add('project');
 
-  const divChildren = [title, addTaskForm()];
+  const divChildren = [title, form, toggleFormBtn];
   appendToElement(div, divChildren);
   return div;
 }
@@ -68,6 +70,7 @@ function createExpandBtn(details) {
 function addTaskForm() {
   const form = document.createElement('form');
   form.classList.add('new-task-form');
+  form.classList.add('display-hidden');
   const submit = createSubmitButton();
   appendStringInputElement(
     'title',
@@ -76,6 +79,7 @@ function addTaskForm() {
     'form-item',
     form
   );
+  form.appendChild(createDateInput());
   appendStringInputElement(
     'description',
     'Description: ',
@@ -83,8 +87,8 @@ function addTaskForm() {
     'form-item',
     form
   );
-  form.appendChild(createDateInput());
   form.appendChild(createSubmitButton());
+
   return form;
 }
 
@@ -123,8 +127,29 @@ function appendStringInputElement(
 function createSubmitButton() {
   const submit = document.createElement('button');
   submit.setAttribute('type', 'submit');
+  submit.setAttribute('id', 'form-submit');
   submit.textContent = 'Submit';
   return submit;
+}
+
+function createToggleFormButton(form) {
+  const button = document.createElement('button');
+  button.id = 'form-toggle';
+  button.textContent = 'Add New Task';
+  function toggleForm() {
+    if (form.classList.contains('display-hidden')) {
+      form.classList.remove('display-hidden');
+      form.classList.add('display-flex');
+      button.textContent = 'Hide Form';
+    } else if (form.classList.contains('display-flex')) {
+      form.classList.remove('display-flex');
+      form.classList.add('display-hidden');
+      button.textContent = 'Add New Task';
+    }
+  }
+
+  button.addEventListener('click', toggleForm);
+  return button;
 }
 
 const months = [
@@ -144,6 +169,10 @@ const months = [
 
 function createDateInput() {
   const div = document.createElement('div');
+  const title = document.createElement('h4');
+  title.textContent = 'Due Date';
+  div.classList.add('form-due-date');
+  div.appendChild(title);
   appendToElement(div, createMonthSelect());
   appendToElement(div, createDaySelect());
   appendToElement(div, createYearSelect());
