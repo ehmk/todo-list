@@ -67,12 +67,21 @@ function createExpandBtn(details) {
 
 function addTaskForm() {
   const form = document.createElement('form');
+  form.classList.add('new-task-form');
   const submit = createSubmitButton();
-  form.appendChild(
-    createStringInputElement('title', 'Title', 'Enter a title', 'todo-item')[0]
+  appendStringInputElement(
+    'title',
+    'Title: ',
+    'Enter a title',
+    'form-item',
+    form
   );
-  form.appendChild(
-    createStringInputElement('title', 'Title', 'Enter a title', 'todo-item')[1]
+  appendStringInputElement(
+    'description',
+    'Description: ',
+    'Enter a description',
+    'form-item',
+    form
   );
   form.appendChild(createSubmitButton());
   return form;
@@ -93,6 +102,21 @@ function createStringInputElement(
   input.classList.add(inputClass);
   input.setAttribute('name', name);
   return [label, input];
+}
+
+function appendStringInputElement(
+  name,
+  labelTextContent,
+  placeholder,
+  inputClass,
+  parentElement
+) {
+  parentElement.appendChild(
+    createStringInputElement(name, labelTextContent, placeholder, inputClass)[0]
+  );
+  parentElement.appendChild(
+    createStringInputElement(name, labelTextContent, placeholder, inputClass)[1]
+  );
 }
 
 function createSubmitButton() {

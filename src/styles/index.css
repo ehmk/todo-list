@@ -20,21 +20,33 @@ body {
   margin-top: 0px;
 }
 
+.new-task-form {
+  padding: 25px 0 50px 0;
+  min-width: 200px;
+}
+
+.form-item {
+  display: block;
+  margin: 10px 0px 10px 0px;
+}
+
 .todo-item {
-  display: flex;
+  display: block;
   flex-direction: column;
   min-width: 200px;
   align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .todo-item h4 {
   margin: 0px;
-  padding: 10px;
+  padding: 10px 0 10px 0;
 }
 
 .todo-item p {
   margin: 0px;
-  padding: 10px;
+  padding: 10px 0 10px 0;
 }
 
 .task-detail {
