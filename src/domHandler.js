@@ -16,8 +16,8 @@ export function createTodoDiv(todoItem) {
   expandBtn.textContent = `Show Details`;
 
   div.classList.add('todo-item');
-  description.classList.add('task-detail');
-  priority.classList.add('task-detail');
+  description.classList.add('display-hidden');
+  priority.classList.add('display-hidden');
   expandBtn.classList.add('expand-btn');
 
   const taskDetails = [description, priority];
@@ -52,11 +52,13 @@ export function createProjectDiv(project) {
 
 function showHideDetails(details, btn) {
   for (let i = 0; i < details.length; i++) {
-    if (window.getComputedStyle(details[i]).display === 'none') {
-      details[i].style.display = 'block';
+    if (details[i].classList.contains('display-hidden')) {
+      details[i].classList.remove('display-hidden');
+      details[i].classList.add('display-block');
       btn.textContent = 'Hide Details';
-    } else if (window.getComputedStyle(details[i]).display !== 'none') {
-      details[i].style.display = 'none';
+    } else if (details[i].classList.contains('display-block')) {
+      details[i].classList.remove('display-block');
+      details[i].classList.add('display-hidden');
       btn.textContent = 'Show Details';
     }
   }
