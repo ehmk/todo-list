@@ -71,7 +71,6 @@ function addTaskForm() {
   const form = document.createElement('form');
   form.classList.add('new-task-form');
   form.classList.add('display-hidden');
-  const submit = createSubmitButton();
   appendStringInputElement(
     'title',
     'Title: ',
@@ -89,6 +88,14 @@ function addTaskForm() {
   );
   appendToElement(form, createPrioritySelect());
   form.appendChild(createSubmitButton());
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const formData = new FormData(form);
+    formData.forEach(function (value, key) {
+      console.log(`${key}: ${value}`);
+    });
+  });
 
   return form;
 }
@@ -130,6 +137,7 @@ function createSubmitButton() {
   submit.setAttribute('type', 'submit');
   submit.setAttribute('id', 'form-submit');
   submit.textContent = 'Submit';
+
   return submit;
 }
 
@@ -174,11 +182,30 @@ function createDateInput() {
   title.textContent = 'Due Date';
   div.classList.add('form-due-date');
   div.appendChild(title);
-  appendToElement(div, createMonthSelect());
-  appendToElement(div, createDaySelect());
-  appendToElement(div, createYearSelect());
+  const monthSelect = createMonthSelect();
+  const daySelect = createDaySelect();
+  const yearSelect = createYearSelect();
+  monthSelect[1].id = 'month-select';
+  daySelect[1].id = 'day-select';
+  yearSelect[1].id = 'year-select';
+  monthSelect[1].setAttribute('name', 'month');
+  daySelect[1].setAttribute('name', 'day');
+  yearSelect[1].setAttribute('name', 'year');
+  appendToElement(div, monthSelect);
+  appendToElement(div, daySelect);
+  appendToElement(div, yearSelect);
   return div;
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const dueDate = {
+    month: document.getElementById('month-select').value,
+    day: document.getElementById('day-select').value,
+    year: document.getElementById('year-select').value,
+  };
+
+  console.log(dueDate);
+});
 
 function populateMonths(monthSelect) {
   for (let month = 0; month < months.length; month++) {
@@ -250,6 +277,7 @@ function createPrioritySelect() {
   const label = document.createElement('label');
   const prioritySelect = document.createElement('select');
   label.textContent = 'Priority: ';
+  prioritySelect.setAttribute('name', 'prioritySelect');
   populatePriorities(prioritySelect);
 
   return [label, prioritySelect];

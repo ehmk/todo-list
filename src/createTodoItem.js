@@ -7,10 +7,4 @@ export default class TodoItem {
     this.dueDate = dueDate;
     this.priority = priority;
   }
-
-  logTodo = () => {
-    console.log(
-      `Title: ${this.title}\nDescription: ${this.description}\nDue Date: ${this.dueDate}\nPriority: ${this.priority}`
-    );
-  };
 }
