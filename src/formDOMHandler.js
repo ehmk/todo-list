@@ -2,6 +2,7 @@ import createDateInput from './dueDateDOMHandler';
 import { appendToElement, createTodoDiv } from './domHandler';
 import TodoItem from './createTodoItem';
 import { compareAsc, format } from 'date-fns';
+import { storeTaskObject } from './localStorageHandler';
 
 export function createNewTaskForm() {
   const form = document.createElement('form');
@@ -47,6 +48,8 @@ export function createNewTaskForm() {
       alert('Please fill in all fields and try again.');
       return;
     }
+    // store locally?
+    storeTaskObject(todoItem);
     const todoDiv = createTodoDiv(todoItem);
     form.parentNode.appendChild(todoDiv);
   });

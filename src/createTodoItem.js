@@ -1,4 +1,4 @@
-// One todo item is a single step on a project. Multiple todo items that fulfill a singular goal is called a project in this case
+import { generateUniqueKey } from './localStorageHandler';
 
 export default class TodoItem {
   constructor(title, description, dueDate, priority) {
@@ -6,5 +6,6 @@ export default class TodoItem {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.key = generateUniqueKey(`task`);
   }
 }
