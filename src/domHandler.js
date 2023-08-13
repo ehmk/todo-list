@@ -1,10 +1,11 @@
 import TodoItem from './createTodoItem';
+import { createNewTaskForm, createToggleFormButton } from './formDOMHandler';
 import './styles/index.css';
 
 export function createProjectDiv(project) {
   const div = document.createElement('div');
   const title = document.createElement('h2');
-  const form = addTaskForm();
+  const form = createNewTaskForm();
   const toggleFormBtn = createToggleFormButton(form);
 
   title.textContent = project.projectName;
@@ -33,14 +34,22 @@ export function createTodoDiv(todoItem) {
 
   const taskDetails = [description, priority];
   const expandBtn = createExpandBtn(taskDetails);
+  const removeTaskBtn = createRemoveTaskBtn();
 
-  const divChildren = [title, dueDate, description, priority, expandBtn];
+  const divChildren = [
+    title,
+    dueDate,
+    description,
+    priority,
+    expandBtn,
+    removeTaskBtn,
+  ];
   appendToElement(div, divChildren);
 
   return div;
 }
 
-function appendToElement(parent, children) {
+export function appendToElement(parent, children) {
   for (let i = 0; i < children.length; i++) {
     parent.appendChild(children[i]);
   }
@@ -67,218 +76,16 @@ function createExpandBtn(details) {
   return btn;
 }
 
-function addTaskForm() {
-  const form = document.createElement('form');
-  form.classList.add('new-task-form');
-  form.classList.add('display-hidden');
-  appendStringInputElement(
-    'title',
-    'Title: ',
-    'Enter a title',
-    'form-item',
-    form
-  );
-  form.appendChild(createDateInput());
-  appendStringInputElement(
-    'description',
-    'Description: ',
-    'Enter a description',
-    'form-item',
-    form
-  );
-  appendToElement(form, createPrioritySelect());
-  form.appendChild(createSubmitButton());
+function createRemoveTaskBtn() {
+  const btn = document.createElement('button');
+  btn.textContent = 'Delete Task';
+  btn.id = 'delete-task-btn';
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const formData = new FormData(form);
-    formData.forEach(function (value, key) {
-      console.log(`${key}: ${value}`);
-    });
-  });
-
-  return form;
-}
-
-function createStringInputElement(
-  name,
-  labelTextContent,
-  placeholder,
-  inputClass
-) {
-  const label = document.createElement('label');
-  const input = document.createElement('input');
-  label.setAttribute('for', name);
-  label.textContent = labelTextContent;
-  input.setAttribute('type', 'text');
-  input.placeholder = placeholder;
-  input.classList.add(inputClass);
-  input.setAttribute('name', name);
-  return [label, input];
-}
-
-function appendStringInputElement(
-  name,
-  labelTextContent,
-  placeholder,
-  inputClass,
-  parentElement
-) {
-  parentElement.appendChild(
-    createStringInputElement(name, labelTextContent, placeholder, inputClass)[0]
-  );
-  parentElement.appendChild(
-    createStringInputElement(name, labelTextContent, placeholder, inputClass)[1]
-  );
-}
-
-function createSubmitButton() {
-  const submit = document.createElement('button');
-  submit.setAttribute('type', 'submit');
-  submit.setAttribute('id', 'form-submit');
-  submit.textContent = 'Submit';
-
-  return submit;
-}
-
-function createToggleFormButton(form) {
-  const button = document.createElement('button');
-  button.id = 'form-toggle';
-  button.textContent = 'Add New Task';
-  function toggleForm() {
-    if (form.classList.contains('display-hidden')) {
-      form.classList.remove('display-hidden');
-      form.classList.add('display-flex');
-      button.textContent = 'Hide Form';
-    } else if (form.classList.contains('display-flex')) {
-      form.classList.remove('display-flex');
-      form.classList.add('display-hidden');
-      button.textContent = 'Add New Task';
+  btn.addEventListener('click', function () {
+    const parentDiv = this.parentElement;
+    if (parentDiv) {
+      parentDiv.parentNode.removeChild(parentDiv);
     }
-  }
-
-  button.addEventListener('click', toggleForm);
-  return button;
-}
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-function createDateInput() {
-  const div = document.createElement('div');
-  const title = document.createElement('h4');
-  title.textContent = 'Due Date';
-  div.classList.add('form-due-date');
-  div.appendChild(title);
-  const monthSelect = createMonthSelect();
-  const daySelect = createDaySelect();
-  const yearSelect = createYearSelect();
-  monthSelect[1].id = 'month-select';
-  daySelect[1].id = 'day-select';
-  yearSelect[1].id = 'year-select';
-  monthSelect[1].setAttribute('name', 'month');
-  daySelect[1].setAttribute('name', 'day');
-  yearSelect[1].setAttribute('name', 'year');
-  appendToElement(div, monthSelect);
-  appendToElement(div, daySelect);
-  appendToElement(div, yearSelect);
-  return div;
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  const dueDate = {
-    month: document.getElementById('month-select').value,
-    day: document.getElementById('day-select').value,
-    year: document.getElementById('year-select').value,
-  };
-
-  console.log(dueDate);
-});
-
-function populateMonths(monthSelect) {
-  for (let month = 0; month < months.length; month++) {
-    const option = document.createElement('option');
-    option.value = month + 1;
-    option.textContent = months[month];
-    monthSelect.appendChild(option);
-  }
-}
-
-function populateDays(daySelect) {
-  for (let day = 1; day <= 31; day++) {
-    const option = document.createElement('option');
-    option.value = day;
-    option.textContent = day;
-    daySelect.appendChild(option);
-  }
-}
-
-function populateYears(yearSelect) {
-  const currentYear = new Date().getFullYear();
-  for (let year = currentYear; year <= currentYear + 50; year++) {
-    const option = document.createElement('option');
-    option.value = year;
-    option.textContent = year;
-    yearSelect.appendChild(option);
-  }
-}
-
-function createMonthSelect() {
-  const monthLabel = document.createElement('label');
-  const monthSelect = document.createElement('select');
-  monthLabel.textContent = 'Month: ';
-  populateMonths(monthSelect);
-
-  return [monthLabel, monthSelect];
-}
-
-function createDaySelect() {
-  const dayLabel = document.createElement('label');
-  const daySelect = document.createElement('select');
-  dayLabel.textContent = 'Day: ';
-  populateDays(daySelect);
-
-  return [dayLabel, daySelect];
-}
-
-function createYearSelect() {
-  const yearLabel = document.createElement('label');
-  const yearSelect = document.createElement('select');
-  yearLabel.textContent = 'Year: ';
-  populateYears(yearSelect);
-
-  return [yearLabel, yearSelect];
-}
-
-function populatePriorities(prioritySelect) {
-  const priorities = ['Low', 'Medium', 'High'];
-
-  for (const priority of priorities) {
-    const option = document.createElement('option');
-    option.value = priority;
-    option.textContent = priority;
-    prioritySelect.appendChild(option);
-  }
-}
-
-function createPrioritySelect() {
-  const label = document.createElement('label');
-  const prioritySelect = document.createElement('select');
-  label.textContent = 'Priority: ';
-  prioritySelect.setAttribute('name', 'prioritySelect');
-  populatePriorities(prioritySelect);
-
-  return [label, prioritySelect];
+  });
+  return btn;
 }
