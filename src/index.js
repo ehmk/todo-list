@@ -6,13 +6,13 @@ import { generateUniqueKey } from './localStorageHandler';
 
 const project = new Project('Default Project');
 
-const todo = new TodoItem(
-  'Example Task Title',
-  'Work on my new project',
-  format(new Date(2023, 11, 2), 'MM-dd-yyyy'),
-  'High',
-  generateUniqueKey('task_')
-);
+// const todo = new TodoItem(
+//   'Example Task Title',
+//   'Work on my new project',
+//   format(new Date(2023, 11, 2), 'MM-dd-yyyy'),
+//   'High',
+//   generateUniqueKey('task_')
+// );
 
 const projectDiv = createProjectDiv(project);
 document.body.appendChild(projectDiv);
@@ -21,6 +21,4 @@ localStorage.setItem('todo', JSON.stringify(todo));
 const todo2 = localStorage.getItem('todo');
 const parsedTodo = JSON.parse(todo2);
 
-console.log(parsedTodo);
-
-projectDiv.appendChild(createTodoDiv(parsedTodo));
+// projectDiv.appendChild(createTodoDiv(parsedTodo));

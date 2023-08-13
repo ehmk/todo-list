@@ -31,6 +31,7 @@ export function createTodoDiv(todoItem) {
   div.classList.add('todo-item');
   description.classList.add('display-hidden');
   priority.classList.add('display-hidden');
+  div.setAttribute('data-key', todoItem.key);
 
   const taskDetails = [description, priority];
   const expandBtn = createExpandBtn(taskDetails);
@@ -83,8 +84,16 @@ function createRemoveTaskBtn() {
 
   btn.addEventListener('click', function () {
     const parentDiv = this.parentElement;
+    const key = this.parentNode.getAttribute('data-key');
     if (parentDiv) {
+      console.log('Removed ' + key);
       parentDiv.parentNode.removeChild(parentDiv);
+      if (localStorage.getItem(key) !== null) {
+        localStorage.removeItem(key);
+        console.log(`Item with key "${key}" has been removed.`);
+      } else {
+        console.log(`Item with key "${key}" does not exist in localStorage.`);
+      }
     }
   });
   return btn;

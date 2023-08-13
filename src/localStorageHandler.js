@@ -15,6 +15,10 @@ export function getProjectObject() {
   // Get project
 }
 
+export function removeObjectFromStorage(key) {
+  localStorage.removeItem(key);
+}
+
 export function generateUniqueKey(prefix) {
   let key = `${prefix}_${generateUniqueId(5)}`;
   if (isObjectInLocalStorage(key)) {
