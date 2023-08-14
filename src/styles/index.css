@@ -1,19 +1,50 @@
 body {
   background-color: rgb(28, 27, 27);
   color: aliceblue;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.projects-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.side-bar {
+  min-width: 200px;
+}
+
+.side-bar button {
+  justify-self: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(43, 41, 41);
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 5px;
+  min-width: 100%;
+}
+
+.new-project-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .project {
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 500px;
+  min-width: 600px;
+  max-width: 600px;
   background-color: rgb(43, 41, 41);
   border: 1px solid rgb(64, 63, 63);
   border-radius: 10px;
   padding: 25px;
+  margin-bottom: 20px;
 }
 
 .project h2 {

@@ -1,6 +1,33 @@
 import TodoItem from './createTodoItem';
-import { createNewTaskForm, createToggleFormButton } from './formDOMHandler';
+import {
+  createNewProjectForm,
+  createNewTaskForm,
+  createToggleFormButton,
+} from './formDOMHandler';
+import { storeObject } from './localStorageHandler';
 import './styles/index.css';
+
+export function createProjectsPanel() {
+  const div = document.createElement('div');
+  div.classList.add('projects-panel');
+  return div;
+}
+
+export function createSidebar() {
+  const div = document.createElement('div');
+  div.classList.add('side-bar');
+  div.appendChild(createNewProjectBtn());
+  const form = createNewProjectForm();
+  div.appendChild(form);
+  return div;
+}
+
+function createNewProjectBtn() {
+  const button = document.createElement('button');
+  button.textContent = 'Create New Project';
+
+  return button;
+}
 
 export function createProjectDiv(project) {
   const div = document.createElement('div');
@@ -10,7 +37,8 @@ export function createProjectDiv(project) {
 
   title.textContent = project.projectName;
   div.classList.add('project');
-
+  div.setAttribute('data-key', project.key);
+  storeObject(project);
   const divChildren = [title, form, toggleFormBtn];
   appendToElement(div, divChildren);
   return div;

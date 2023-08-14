@@ -1,8 +1,33 @@
 import createDateInput from './dueDateDOMHandler';
-import { appendToElement, createTodoDiv } from './domHandler';
+import { appendToElement, createTodoDiv, createProjectDiv } from './domHandler';
+import Project from './createProject';
 import TodoItem from './createTodoItem';
 import { compareAsc, format } from 'date-fns';
-import { storeTaskObject } from './localStorageHandler';
+import { storeObject } from './localStorageHandler';
+
+export function createNewProjectForm() {
+  const form = document.createElement('form');
+  form.classList.add('new-project-form');
+  const label = document.createElement('label');
+  const input = document.createElement('input');
+  input.placeholder = 'New project title';
+  const submitBtn = createSubmitButton();
+
+  submitBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (!input.value) {
+      console.log(input.value);
+    } else {
+      const project = new Project(input.value);
+      const projectDiv = createProjectDiv(project);
+      document.querySelector('.projects-panel').appendChild(projectDiv);
+    }
+  });
+  form.appendChild(label);
+  form.appendChild(input);
+  form.appendChild(submitBtn);
+  return form;
+}
 
 export function createNewTaskForm() {
   const form = document.createElement('form');
@@ -30,7 +55,6 @@ export function createNewTaskForm() {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     const formData = new FormData(form);
-    // Create new Todo Object here, translate it to HTML, and append it to the project
     const todoItem = new TodoItem(
       formData.get('title'),
       formData.get('description'),
@@ -48,8 +72,7 @@ export function createNewTaskForm() {
       alert('Please fill in all fields and try again.');
       return;
     }
-    // store locally?
-    storeTaskObject(todoItem);
+    storeObject(todoItem);
     const todoDiv = createTodoDiv(todoItem);
     form.parentNode.appendChild(todoDiv);
   });
