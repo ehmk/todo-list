@@ -2,17 +2,20 @@ body {
   background-color: rgb(28, 27, 27);
   color: aliceblue;
   display: flex;
-  justify-content: space-evenly;
 }
 
 .projects-panel {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  min-width: 600px;
+  max-width: 600px;
 }
 
 .side-bar {
   min-width: 200px;
+  margin-left: 10px;
+  margin-right: 150px;
 }
 
 .side-bar button {
