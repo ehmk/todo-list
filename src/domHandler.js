@@ -16,16 +16,26 @@ export function createProjectsPanel() {
 export function createSidebar() {
   const div = document.createElement('div');
   div.classList.add('side-bar');
-  div.appendChild(createNewProjectBtn());
   const form = createNewProjectForm();
+  form.classList.add('display-hidden');
+  div.appendChild(createNewProjectBtn(form));
   div.appendChild(form);
   return div;
 }
 
-function createNewProjectBtn() {
+function createNewProjectBtn(form) {
   const button = document.createElement('button');
   button.textContent = 'Create New Project';
 
+  button.addEventListener('click', function () {
+    if (form.classList.contains('display-hidden')) {
+      form.classList.remove('display-hidden');
+      button.textContent = 'Hide Form';
+    } else if (!form.classList.contains('display-hidden')) {
+      form.classList.add('display-hidden');
+      button.textContent = 'Create New Project';
+    }
+  });
   return button;
 }
 
@@ -39,6 +49,7 @@ export function createProjectDiv(project) {
   title.textContent = project.projectName;
   div.classList.add('project');
   div.setAttribute('data-key', project.key);
+  deleteProjectBtn.id = 'delete-project-btn';
   storeObject(project);
   const divChildren = [title, form, toggleFormBtn, deleteProjectBtn];
   appendToElement(div, divChildren);

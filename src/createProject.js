@@ -1,5 +1,5 @@
 import TodoItem from './createTodoItem';
-import { generateUniqueKey } from './localStorageHandler';
+import { storeObject, generateUniqueKey } from './localStorageHandler';
 
 export default class Project {
   constructor(projectName) {
