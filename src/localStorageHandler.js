@@ -1,9 +1,13 @@
 export function storeObject(object) {
+  console.log('Storing: ' + object.key);
   localStorage.setItem(object.key, JSON.stringify(object));
 }
 
 export function removeObjectFromStorage(key) {
+  const JSONObject = localStorage.getItem(key);
+  const parsedObject = JSON.parse(JSONObject);
   localStorage.removeItem(key);
+  console.log('Removed: ' + parsedObject.key);
 }
 
 export function generateUniqueKey(prefix) {
@@ -13,6 +17,14 @@ export function generateUniqueKey(prefix) {
   } else {
     return key;
   }
+}
+
+export function updateProjectTodoList(projectKey, todoKey) {
+  console.log('Updating >> ' + projectKey + ' : ' + todoKey);
+  const projectObject = JSON.parse(localStorage.getItem(projectKey));
+  localStorage.removeItem(projectKey);
+  projectObject.tasks.push(todoKey);
+  storeObject(projectObject);
 }
 
 function generateUniqueId(length) {

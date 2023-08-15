@@ -2,17 +2,18 @@ import Project from './createProject';
 import { createSidebar } from './sideBarDOMHandler';
 import { createProjectDiv, createProjectsPanel } from './projectDOMHandler';
 import { generateUniqueKey } from './localStorageHandler';
+import { populateProjectsPanel } from './domUtilities';
 
-const project = new Project('Default Project');
-console.log(project);
-
-const projectsPanel = createProjectsPanel();
 const sideBar = createSidebar();
+const projectsPanel = createProjectsPanel();
+const project = new Project('Default Project');
+project.key = 'DEFAULT_PROJECT';
 const projectDiv = createProjectDiv(project);
-
 document.body.appendChild(sideBar);
-projectsPanel.appendChild(projectDiv);
 document.body.appendChild(projectsPanel);
 
-const todo2 = localStorage.getItem('todo');
-const parsedTodo = JSON.parse(todo2);
+document.addEventListener('DOMContentLoaded', function () {
+  populateProjectsPanel(projectsPanel);
+
+  console.log('DOM is fully loaded');
+});

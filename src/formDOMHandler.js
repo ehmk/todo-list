@@ -3,7 +3,11 @@ import createDateInput from './dueDateDOMHandler';
 import { appendToElement } from './domUtilities';
 import TodoItem from './createTodoItem';
 import { compareAsc, format } from 'date-fns';
-import { storeObject } from './localStorageHandler';
+import {
+  removeObjectFromStorage,
+  storeObject,
+  updateProjectTodoList,
+} from './localStorageHandler';
 import Project from './createProject';
 import { createProjectDiv } from './projectDOMHandler';
 
@@ -57,6 +61,7 @@ export function createNewTaskForm() {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     const formData = new FormData(form);
+    const parentKey = form.parentNode.getAttribute('data-key');
     const todoItem = new TodoItem(
       formData.get('title'),
       formData.get('description'),
@@ -76,9 +81,9 @@ export function createNewTaskForm() {
     }
     storeObject(todoItem);
     const todoDiv = createTodoDiv(todoItem);
+    updateProjectTodoList(parentKey, todoItem.key);
     form.parentNode.appendChild(todoDiv);
   });
-
   return form;
 }
 
