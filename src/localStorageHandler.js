@@ -2,14 +2,6 @@ export function storeObject(object) {
   localStorage.setItem(object.key, JSON.stringify(object));
 }
 
-export function getTaskObject(taskObject) {
-  // Get task
-}
-
-export function getProjectObject() {
-  // Get project
-}
-
 export function removeObjectFromStorage(key) {
   localStorage.removeItem(key);
 }

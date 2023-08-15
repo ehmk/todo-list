@@ -1,4 +1,4 @@
-import { appendToElement } from './domHandler';
+import { appendToElement } from './domUtilities';
 
 const months = [
   'January',

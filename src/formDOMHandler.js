@@ -1,9 +1,11 @@
+import { createTodoDiv } from './todoDOMHandler';
 import createDateInput from './dueDateDOMHandler';
-import { appendToElement, createTodoDiv, createProjectDiv } from './domHandler';
-import Project from './createProject';
+import { appendToElement } from './domUtilities';
 import TodoItem from './createTodoItem';
 import { compareAsc, format } from 'date-fns';
 import { storeObject } from './localStorageHandler';
+import Project from './createProject';
+import { createProjectDiv } from './projectDOMHandler';
 
 export function createNewProjectForm() {
   const form = document.createElement('form');

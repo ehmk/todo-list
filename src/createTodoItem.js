@@ -8,4 +8,11 @@ export default class TodoItem {
     this.priority = priority;
     this.key = generateUniqueKey(`task`);
   }
+
+  parentProjectId;
+
+  setParentProjectId(id) {
+    parentProjectId = id;
+    console.log('set');
+  }
 }
