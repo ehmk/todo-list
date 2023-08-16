@@ -14,21 +14,25 @@ export function appendToElement(parent, children) {
   }
 }
 
-export function populateProjectsPanel(parentDiv) {
+export function populateProjects(parentDiv) {
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     const value = localStorage.getItem(key);
     const object = JSON.parse(value);
     const objectDiv = createProjectDiv(object);
+    populateTodos(object);
 
-    if (localStorage.getItem(key) !== null) {
+    if (localStorage.getItem(key) !== null && /^project/i.test(key)) {
       parentDiv.appendChild(objectDiv);
     } else {
       continue;
     }
-
-    // parentDiv.appendChild(objectDiv);
-
-    // console.log(`Key: ${key}, Value: ${value}`);
   }
+}
+
+function populateTodos(projectDiv) {
+  console.log(projectDiv.tasks);
+  // for (let i = 0; i < projectDiv.tasks.length; i++) {
+  //   console.log(i);
+  // }
 }
