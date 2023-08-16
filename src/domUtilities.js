@@ -30,9 +30,29 @@ export function populateProjects(parentDiv) {
   }
 }
 
-function populateTodos(projectDiv) {
-  console.log(projectDiv.tasks);
-  // for (let i = 0; i < projectDiv.tasks.length; i++) {
+function populateTodos(project) {
+  console.log(project.tasks);
+  // for (let i = 0; i < project.tasks.length; i++) {
   //   console.log(i);
   // }
+}
+
+function checkForDefaultProject(defaultKey) {
+  if (localStorage.getItem(defaultKey) !== null) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function loadDefaultProject(projectsPanel) {
+  if (checkForDefaultProject('project_default') === true) {
+    console.log('Not loading default project...');
+    return;
+  } else {
+    console.log('Loading default project...');
+    const project = new Project('Default Project');
+    project.key = 'project_default';
+    const projectDiv = createProjectDiv(project);
+  }
 }
