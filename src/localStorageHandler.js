@@ -1,5 +1,4 @@
 export function storeObject(object) {
-  console.log('Storing: ' + object.key);
   localStorage.setItem(object.key, JSON.stringify(object));
 }
 
@@ -41,4 +40,11 @@ function generateUniqueId(length) {
 
 function isObjectInLocalStorage(key) {
   return localStorage.getItem(key) !== null;
+}
+
+export function removeFromArray(array, valueToRemove) {
+  const indexToRemove = array.indexOf(valueToRemove);
+  if (indexToRemove !== -1) {
+    array.splice(indexToRemove, 1);
+  }
 }

@@ -7,6 +7,8 @@ import {
 import { storeObject } from './localStorageHandler';
 import { createProjectDiv } from './projectDOMHandler';
 import './styles/index.css';
+import { createTodoDiv } from './todoDOMHandler';
+import Project from './createProject';
 
 export function appendToElement(parent, children) {
   for (let i = 0; i < children.length; i++) {
@@ -20,25 +22,35 @@ export function populateProjects(parentDiv) {
     const value = localStorage.getItem(key);
     const object = JSON.parse(value);
     const objectDiv = createProjectDiv(object);
-    populateTodos(object);
 
-    if (localStorage.getItem(key) !== null && /^project/i.test(key)) {
+    if (key === 'project_default') {
+      continue;
+    } else if (localStorage.getItem(key) !== null && /^project/i.test(key)) {
       parentDiv.appendChild(objectDiv);
     } else {
       continue;
     }
+    populateTodos(objectDiv, object);
   }
 }
 
-function populateTodos(project) {
-  console.log(project.tasks);
-  // for (let i = 0; i < project.tasks.length; i++) {
-  //   console.log(i);
-  // }
+function populateTodos(projectDiv, projectObject) {
+  const tasks = projectObject.tasks;
+  for (let i = 0; i < tasks.length; i++) {
+    let key = tasks[i];
+    let object = JSON.parse(localStorage.getItem(key));
+    let objectDiv = createTodoDiv(object);
+
+    projectDiv.appendChild(objectDiv);
+  }
 }
 
-function checkForDefaultProject(defaultKey) {
-  if (localStorage.getItem(defaultKey) !== null) {
+export function checkForDefaultProject(projectsPanel) {
+  const childWithAttribute = projectsPanel.querySelector(
+    'div[data-key="project_default"]'
+  );
+
+  if (childWithAttribute) {
     return true;
   } else {
     return false;
@@ -46,13 +58,18 @@ function checkForDefaultProject(defaultKey) {
 }
 
 export function loadDefaultProject(projectsPanel) {
-  if (checkForDefaultProject('project_default') === true) {
-    console.log('Not loading default project...');
+  if (localStorage.getItem('project_default') !== null) {
+    const jsonString = localStorage.getItem('project_default');
+    const object = JSON.parse(jsonString);
+    const objectDiv = createProjectDiv(object);
+    populateTodos(objectDiv, object);
+    projectsPanel.appendChild(objectDiv);
     return;
   } else {
-    console.log('Loading default project...');
     const project = new Project('Default Project');
     project.key = 'project_default';
     const projectDiv = createProjectDiv(project);
+    populateTodos(projectDiv, project);
+    projectsPanel.appendChild(projectDiv);
   }
 }

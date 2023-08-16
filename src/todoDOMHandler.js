@@ -1,4 +1,5 @@
 import { appendToElement } from './domUtilities';
+import { removeFromArray, storeObject } from './localStorageHandler';
 
 export function createTodoDiv(todoItem) {
   const div = document.createElement('div');
@@ -62,14 +63,19 @@ function createRemoveTaskBtn() {
   btn.addEventListener('click', function () {
     const parentDiv = this.parentElement;
     const key = this.parentNode.getAttribute('data-key');
+    const grandparentDiv = parentDiv.parentNode;
+    const grandparentKey = grandparentDiv.getAttribute('data-key');
+    const json = localStorage.getItem(grandparentKey);
+    const object = JSON.parse(json);
+    localStorage.removeItem(grandparentKey);
+    removeFromArray(object.tasks, key);
+    storeObject(object);
     if (parentDiv) {
-      console.log('Removed ' + key);
       parentDiv.parentNode.removeChild(parentDiv);
       if (localStorage.getItem(key) !== null) {
         localStorage.removeItem(key);
-        console.log(`Item with key "${key}" has been removed.`);
       } else {
-        console.log(`Item with key "${key}" does not exist in localStorage.`);
+        return;
       }
     }
   });
