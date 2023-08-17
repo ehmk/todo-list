@@ -38,7 +38,7 @@ body {
 
 .project {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   min-width: 600px;
@@ -46,28 +46,29 @@ body {
   background-color: rgb(43, 41, 41);
   border: 1px solid rgb(64, 63, 63);
   border-radius: 10px;
-  padding: 25px;
+  padding: 15px;
   margin-bottom: 20px;
 }
 
 .project h2 {
-  margin-top: 0px;
+  width: 90%;
+  text-align: center;
+  margin: 0px;
 }
 
 #delete-project-btn {
-  justify-self: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
   background-color: rgb(43, 41, 41);
   color: white;
-  padding: 5px 10px 5px 10px;
+  padding: 10px 10px 10px 10px;
   border: 1px solid rgb(100, 100, 100);
   border-radius: 5px;
+  width: 10%;
+  margin: 0px;
 }
 
 .new-task-form {
-  padding: 25px 0 10px 0;
-  min-width: 225px;
+  padding: 25px 50px 10px 50px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -101,9 +102,8 @@ body {
 }
 
 #form-toggle {
-  justify-self: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
   background-color: rgb(43, 41, 41);
   color: white;
   padding: 5px 10px 5px 10px;
@@ -113,22 +113,28 @@ body {
 
 .todo-item {
   display: flex;
-  flex-direction: column;
-  min-width: 200px;
+  flex-wrap: wrap;
+  width: 100%;
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
   justify-content: flex-end;
+  border: 1px solid rgb(73, 73, 73);
+  border-radius: 5px;
+  padding: 10px 10px;
 }
 
 .todo-item h4 {
   margin: 0px;
-  padding: 10px 0 10px 0;
+  width: 90%;
+  text-align: center;
 }
 
 .todo-item p {
   margin: 0px;
   padding: 10px 0 10px 0;
+  width: 100%;
+  text-align: center;
 }
 
 .task-detail {
@@ -136,20 +142,17 @@ body {
 }
 
 .expand-btn {
-  justify-self: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
   background-color: rgb(43, 41, 41);
   color: white;
   padding: 5px 10px 5px 10px;
   border: 1px solid rgb(100, 100, 100);
   border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 #delete-task-btn {
-  justify-self: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  width: 10%;
   background-color: rgb(43, 41, 41);
   color: white;
   padding: 5px 10px 5px 10px;

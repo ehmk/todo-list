@@ -20,14 +20,14 @@ export function createProjectDiv(project) {
   div.setAttribute('data-key', project.key);
   deleteProjectBtn.id = 'delete-project-btn';
   storeObject(project);
-  const divChildren = [title, form, toggleFormBtn, deleteProjectBtn];
+  const divChildren = [title, deleteProjectBtn, form, toggleFormBtn];
   appendToElement(div, divChildren);
   return div;
 }
 
 function createRemoveProjectBtn() {
   const button = document.createElement('button');
-  button.textContent = 'Remove Project';
+  button.textContent = 'X';
   button.id = 'delete-project-btn';
 
   button.addEventListener('click', function () {

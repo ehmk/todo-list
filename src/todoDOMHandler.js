@@ -24,11 +24,11 @@ export function createTodoDiv(todoItem) {
 
   const divChildren = [
     title,
+    removeTaskBtn,
     dueDate,
     description,
     priority,
     expandBtn,
-    removeTaskBtn,
   ];
   appendToElement(div, divChildren);
   return div;
@@ -57,7 +57,7 @@ function createExpandBtn(details) {
 
 function createRemoveTaskBtn() {
   const btn = document.createElement('button');
-  btn.textContent = 'Delete Task';
+  btn.textContent = 'X';
   btn.id = 'delete-task-btn';
 
   btn.addEventListener('click', function () {
