@@ -2,6 +2,7 @@ body {
   background-color: rgb(28, 27, 27);
   color: aliceblue;
   display: flex;
+  justify-content: space-around;
 }
 
 .projects-panel {
@@ -15,7 +16,6 @@ body {
 .side-bar {
   min-width: 200px;
   margin-left: 10px;
-  margin-right: 150px;
 }
 
 .side-bar button {
